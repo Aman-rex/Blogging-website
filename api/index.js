@@ -10,17 +10,16 @@ mongoose.connect(process.env.MONGO).then(()=>{
     console.log('Connected to MongoDB')
 }).catch((err)=>{
     console.log(err)
-})
-
-
+}) 
+  
 const app = express();
 
 app.use(express.json())  //to allow input as json at backend
 
 app.listen(3000,()=>{
     console.log("server is runnning on port 3000")
-})                    
-
+})                      
+ 
 app.use('/api/user',userRoutes)
 app.use('/api/auth',authRoute)
 app.use((err,req,res,next)=>{
