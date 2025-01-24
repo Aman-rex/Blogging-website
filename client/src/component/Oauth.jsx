@@ -18,15 +18,17 @@ export default function Oauth() {
         provider.setCustomParameters({prompt:'select_account'})
         try {
             const resultsFromGoogle = await signInWithPopup(auth,provider)
+            console.log(resultsFromGoogle)
             const res = await fetch('/api/auth/google',{
                 method:'POST',
                 headers:{'content-Type':'application/json'},
-                body:JSON.stringify({
+                body:JSON.stringify({  
                     name:resultsFromGoogle.user.displayName,
                     email:resultsFromGoogle.user.email,
                     googlePhotoUrl:resultsFromGoogle.user.photoURL
                 })
             })
+            
             const data = await res.json()
             if(res.ok){
                 dispatch(signInSuccess(data))
